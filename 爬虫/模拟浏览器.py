@@ -1,5 +1,6 @@
 import  urllib.request
 import  random
+import  ssl
 
 url="https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&ch=15&tn=56060048_4_pg&wd=%E7%9A%84%E6%92%92&oq=github&rsv_pq=ddf2e2140001ae80&rsv_t=2272ieCXe0UrB%2FHPXvtso%2FKKZDCy%2BoUaYrsMPH36ZBDTx%2BhNENgwujf1o0JPzoilTtG%2BlA&rqlang=cn&rsv_enter=0&inputT=6257&rsv_sug3=43&rsv_sug1=34&rsv_sug7=100&rsv_sug4=6257"
 # 模拟请求头
@@ -21,6 +22,8 @@ agentList=["Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/60
 agent=random.choice(agentList)
 req2=urllib.request.Request(url)
 req2.add_header("User-Agent",agent)
-response2=urllib.request.urlopen(req2)
+# 创建未验证的上下文
+context=ssl._create_unverified_context()
+response2=urllib.request.urlopen(req2,context=context)
 data2=response2.read().decode("utf-8")
 print(data2)
