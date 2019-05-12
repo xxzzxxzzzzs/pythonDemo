@@ -2,7 +2,7 @@ import  urllib.request
 import  random
 import  ssl
 
-url="https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&ch=15&tn=56060048_4_pg&wd=%E7%9A%84%E6%92%92&oq=github&rsv_pq=ddf2e2140001ae80&rsv_t=2272ieCXe0UrB%2FHPXvtso%2FKKZDCy%2BoUaYrsMPH36ZBDTx%2BhNENgwujf1o0JPzoilTtG%2BlA&rqlang=cn&rsv_enter=0&inputT=6257&rsv_sug3=43&rsv_sug1=34&rsv_sug7=100&rsv_sug4=6257"
+url="https://www.pexels.com"
 # 模拟请求头
 headers={
     "User-Agent":"Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1"

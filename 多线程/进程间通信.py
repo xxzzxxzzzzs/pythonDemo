@@ -41,8 +41,9 @@ if __name__ == "__main__":
 
 
 
-    pp=Pool(2)
-    for i in range(10):
+    pp=Pool(16)
+
+    for i in range(200):
         pp.apply_async(run,args=(i,))
     # close 后不能加新进程
     pp.close()
