@@ -5,28 +5,43 @@ import time
 import  random
 import  ssl
 #-*- coding:utf-8 -*-
-def downImg(url,topath,txtpath,page):
+def downImg(url,topath,txtpath,page,searchPath):
     # header={
     #     "User-Agent": "Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1"
     # }
     agentList = [
-        "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1",
-        "Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11",
-        "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1092.0 Safari/536.6",
-        "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1090.0 Safari/536.6",
-        "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/19.77.34.5 Safari/537.1",
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.9 Safari/536.5",
-        "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5",
-        "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3",
-        "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3",
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3",
-        "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3",
-        "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3",
-        "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3",
-        "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3",
-        "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3",
-        "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.0 Safari/536.3",
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"]
+        # IPhone
+        "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5",
+        # IPod
+        "Mozilla/5.0 (iPod; U; CPU iPhone OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5",
+        # IPAD
+        "Mozilla/5.0 (iPad; U; CPU OS 4_2_1 like Mac OS X; zh-cn) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5",
+        "Mozilla/5.0 (iPad; U; CPU OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5",
+        # Android
+        "Mozilla/5.0 (Linux; U; Android 2.2.1; zh-cn; HTC_Wildfire_A3333 Build/FRG83D) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
+        "Mozilla/5.0 (Linux; U; Android 2.3.7; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
+        # QQ浏览器 Android版本
+        "MQQBrowser/26 Mozilla/5.0 (Linux; U; Android 2.3.7; zh-cn; MB200 Build/GRJ22; CyanogenMod-7) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
+        # Android Opera Mobile
+        "Opera/9.80 (Android 2.3.4; Linux; Opera Mobi/build-1107180945; U; en-GB) Presto/2.8.149 Version/11.10",
+        # Android Pad Moto Xoom
+        "Mozilla/5.0 (Linux; U; Android 3.0; en-us; Xoom Build/HRI39) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13",
+        # BlackBerry
+        "Mozilla/5.0 (BlackBerry; U; BlackBerry 9800; en) AppleWebKit/534.1+ (KHTML, like Gecko) Version/6.0.0.337 Mobile Safari/534.1+",
+        # WebOS HP Touchpad
+        "Mozilla/5.0 (hp-tablet; Linux; hpwOS/3.0.0; U; en-US) AppleWebKit/534.6 (KHTML, like Gecko) wOSBrowser/233.70 Safari/534.6 TouchPad/1.0",
+        # Nokia N97
+        "Mozilla/5.0 (SymbianOS/9.4; Series60/5.0 NokiaN97-1/20.0.019; Profile/MIDP-2.1 Configuration/CLDC-1.1) AppleWebKit/525 (KHTML, like Gecko) BrowserNG/7.1.18124",
+        # Windows Phone Mango
+        "Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; HTC; Titan)",
+        # UC浏览器
+        "UCWEB7.0.2.37/28/999",
+        "NOKIA5700/ UCWEB7.0.2.37/28/999",
+        # UCOpenwave
+        "Openwave/ UCWEB7.0.2.37/28/999",
+        # UC Opera
+        "Mozilla/4.0 (compatible; MSIE 6.0; ) Opera/UCWEB7.0.2.37/28/999"
+        ]
     # headers={
     #     "User-Agent":random.choice(agentList)
     # }
@@ -54,13 +69,16 @@ def downImg(url,topath,txtpath,page):
     for imgurl in imgs:
         with open(txtPath,"a") as f:
             f.write(str(imgurl)+'\r\n')
+    isExists = os.path.exists(topath+searchPath)
+    if not isExists:
+        os.mkdir(topath+searchPath)
 
     for imgurl in  imgs:
-        path=os.path.join(topath,str(page)+"_"+str(num)+".jpg")
+        path=os.path.join(topath+searchPath,str(page)+"_"+str(num)+".jpg")
         num+=1
         # 下载
-        if num%4==0:
-            time.sleep(3)
+        if num%6==0:
+            time.sleep(2)
         try:
             print(imgurl)
             # urllib.request.urlretrieve(imgurl, filename=path)
@@ -68,7 +86,7 @@ def downImg(url,topath,txtpath,page):
             req3.add_header("User-Agent", agent)
             # 创建未验证的上下文
             context2 = ssl._create_unverified_context()
-            response3 = urllib.request.urlopen(req3, context=context2)
+            response3 = urllib.request.urlopen(req3, context=context2,timeout=1)
             cat_img = response3.read()
             # imgres = req3.get(imgurl)
             with open(path, 'wb') as f:
@@ -81,12 +99,13 @@ def downImg(url,topath,txtpath,page):
 
 
 downPath=r"D:\img\imgs"
+searchPath=r"Sculpture"
 txtPath=r"D:\img\imgs.txt"
-httpurl="https://www.pexels.com/search/technology/"
+httpurl="https://www.pexels.com/search/"
 page=1
 for page in range(1,30):
-    httpurlpage=httpurl+"?page="+str(page)
-    downImg(httpurlpage,downPath,txtPath,page)
+    httpurlpage=httpurl+searchPath+"?page="+str(page)
+    downImg(httpurlpage,downPath,txtPath,page,searchPath)
 
 
 
